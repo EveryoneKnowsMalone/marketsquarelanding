@@ -56,53 +56,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttonText = document.querySelector('.button-text');
     const loadingSpinner = document.querySelector('.loading-spinner');
 
-    waitlistForm.addEventListener('submit', async function(e) {
+    waitlistForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Show loading state
-        buttonText.style.display = 'none';
-        loadingSpinner.style.display = 'inline-block';
-        waitlistForm.querySelector('button').disabled = true;
+        // Show coming soon message
+        formMessage.textContent = 'Waitlist Coming Soon! Stay tuned for updates.';
+        formMessage.className = 'form-message success';
+        formMessage.style.display = 'block';
+        waitlistForm.reset();
 
-        // Get form data
-        const formData = new FormData(waitlistForm);
-        const data = {
-            businessName: formData.get('businessName'),
-            email: formData.get('email'),
-            message: formData.get('message')
-        };
-
-        try {
-            // Replace with your actual API endpoint
-            const response = await fetch('YOUR_API_ENDPOINT', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            // Show success message
-            formMessage.textContent = 'Thank you for joining our waitlist! We\'ll be in touch soon.';
-            formMessage.className = 'form-message success';
-            formMessage.style.display = 'block';
-            waitlistForm.reset();
-
-        } catch (error) {
-            // Show error message
-            formMessage.textContent = 'Sorry, something went wrong. Please try again later.';
-            formMessage.className = 'form-message error';
-            formMessage.style.display = 'block';
-        } finally {
-            // Reset button state
-            buttonText.style.display = 'inline-block';
-            loadingSpinner.style.display = 'none';
-            waitlistForm.querySelector('button').disabled = false;
-        }
+        // Hide message after 5 seconds
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
     });
 
     // Close mobile menu when clicking outside
