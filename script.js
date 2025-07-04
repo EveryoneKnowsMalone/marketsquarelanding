@@ -3,17 +3,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
 
+    // Add item index for staggered animation
+    navLinks.querySelectorAll('li').forEach((item, index) => {
+        item.style.setProperty('--item-index', index);
+    });
+
     // Toggle mobile menu
     mobileMenuButton.addEventListener('click', function(e) {
         e.stopPropagation();
-        navLinks.classList.toggle('active');
-        body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        const isActive = navLinks.classList.contains('active');
+        
+        if (!isActive) {
+            navLinks.classList.add('active');
+            mobileMenuButton.classList.add('active');
+            body.style.overflow = 'hidden';
+        } else {
+            navLinks.classList.remove('active');
+            mobileMenuButton.classList.remove('active');
+            body.style.overflow = '';
+        }
     });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
         if (!event.target.closest('.navbar') && navLinks.classList.contains('active')) {
             navLinks.classList.remove('active');
+            mobileMenuButton.classList.remove('active');
             body.style.overflow = '';
         }
     });
@@ -22,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function() {
             navLinks.classList.remove('active');
+            mobileMenuButton.classList.remove('active');
             body.style.overflow = '';
         });
     });
@@ -53,8 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Waitlist form handling
     const waitlistForm = document.getElementById('waitlistForm');
     const formMessage = document.getElementById('formMessage');
-    const buttonText = document.querySelector('.button-text');
-    const loadingSpinner = document.querySelector('.loading-spinner');
 
     waitlistForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -69,12 +83,5 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             formMessage.style.display = 'none';
         }, 5000);
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.nav-links') && !e.target.closest('.mobile-menu')) {
-            navLinks.classList.remove('active');
-        }
     });
 }); 
