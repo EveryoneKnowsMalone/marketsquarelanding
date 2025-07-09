@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard | MarketSquare Demo</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body { background: #f8f9fb; }
+        .seller-dashboard-container { display: flex; min-height: 100vh; }
+        .seller-sidebar {
+            background: #4f46e5;
+            color: #fff;
+            width: 220px;
+            min-width: 180px;
+            padding: 32px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .seller-sidebar .logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 32px; }
+        .seller-sidebar nav {
+            width: 100%;
+        }
+        .seller-sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 32px;
+            font-size: 1.08rem;
+            border-left: 4px solid transparent;
+            transition: background 0.2s, border 0.2s;
+        }
+        .seller-sidebar nav a.active, .seller-sidebar nav a:hover {
+            background: #3b82f6;
+            border-left: 4px solid #fff;
+        }
+        .seller-main {
+            flex: 1;
+            padding: 36px 32px 32px 32px;
+        }
+        .seller-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .seller-topbar .back-link {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .seller-summary-cards {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .seller-summary-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(79,70,229,0.06);
+            padding: 24px 32px;
+            min-width: 180px;
+            flex: 1 1 180px;
+            text-align: center;
+        }
+        .seller-summary-card .card-label {
+            color: #4f46e5;
+            font-size: 1.01rem;
+            margin-bottom: 6px;
+        }
+        .seller-summary-card .card-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #22223b;
+        }
+        .seller-section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #22223b;
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+        .seller-products-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .seller-products-table th, .seller-products-table td {
+            padding: 12px 10px;
+            text-align: left;
+        }
+        .seller-products-table th {
+            background: #f3f4fa;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+        .seller-products-table tr:not(:last-child) {
+            border-bottom: 1px solid #ececec;
+        }
+        .seller-products-table td {
+            color: #22223b;
+        }
+        .seller-orders-list {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(79,70,229,0.06);
+            padding: 18px 16px;
+        }
+        .seller-orders-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .seller-orders-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ececec;
+            color: #22223b;
+        }
+        .seller-orders-list li:last-child {
+            border-bottom: none;
+        }
+        @media (max-width: 900px) {
+            .seller-dashboard-container { flex-direction: column; }
+            .seller-sidebar { flex-direction: row; width: 100%; min-width: 0; padding: 12px 0; }
+            .seller-sidebar nav { display: flex; gap: 8px; justify-content: center; }
+            .seller-main { padding: 18px 6px 12px 6px; }
+            .seller-summary-cards { gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="seller-dashboard-container">
+        <aside class="seller-sidebar">
+            <div class="logo">MarketSquare</div>
+            <nav>
+                <a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="#"><i class="fas fa-box"></i> Products</a>
+                <a href="#"><i class="fas fa-shopping-bag"></i> Orders</a>
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="../demo/index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+        <main class="seller-main">
+            <div class="seller-topbar">
+                <div></div>
+                <a href="../demo/index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Storefront</a>
+            </div>
+            <div class="seller-summary-cards">
+                <div class="seller-summary-card">
+                    <div class="card-label">Total Sales</div>
+                    <div class="card-value">$2,340</div>
+                </div>
+                <div class="seller-summary-card">
+                    <div class="card-label">Orders</div>
+                    <div class="card-value">48</div>
+                </div>
+                <div class="seller-summary-card">
+                    <div class="card-label">Products</div>
+                    <div class="card-value">7</div>
+                </div>
+                <div class="seller-summary-card">
+                    <div class="card-label">Pending</div>
+                    <div class="card-value">3</div>
+                </div>
+            </div>
+            <div class="seller-section-title">Product Management</div>
+            <table class="seller-products-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Smartphone X1</td>
+                        <td>$499</td>
+                        <td>Active</td>
+                        <td>12</td>
+                        <td><button class="cta-button" style="padding:4px 12px;font-size:0.95rem;">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>Classic Jacket</td>
+                        <td>$89</td>
+                        <td>Active</td>
+                        <td>5</td>
+                        <td><button class="cta-button" style="padding:4px 12px;font-size:0.95rem;">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>Modern Lamp</td>
+                        <td>$39</td>
+                        <td>Inactive</td>
+                        <td>0</td>
+                        <td><button class="cta-button" style="padding:4px 12px;font-size:0.95rem;">Edit</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="seller-section-title">Recent Orders</div>
+            <div class="seller-orders-list">
+                <ul>
+                    <li>Order #1001 - $499 - Delivered</li>
+                    <li>Order #1002 - $89 - In Progress</li>
+                    <li>Order #1003 - $39 - Pending</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 
